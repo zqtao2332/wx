@@ -1,7 +1,6 @@
 package me.zqt.wx.model.message;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import me.zqt.wx.model.ImageModel;
 
 /**
@@ -9,8 +8,7 @@ import me.zqt.wx.model.ImageModel;
  * @description: 图片消息
  * @version: 1.0
  */
-@Setter
-@Getter
+@Data
 public class ImageMessage extends BaseMessage {
     /**
      * 图片

@@ -1,7 +1,6 @@
 package me.zqt.wx.model.menu;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 /**
  * @auther: zqtao
@@ -10,8 +9,7 @@ import lombok.Setter;
  * 这些菜单项即可以是子菜单项（不含二级菜单的一级菜单），也可以是父菜单项（包含二级菜单的菜单项）
  * @version: 1.0
  */
-@Setter
-@Getter
+@Data
 public class Menu {
     private BaseButton[] button;
 }

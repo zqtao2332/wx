@@ -1,15 +1,13 @@
 package me.zqt.wx.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 /**
  * @auther: zqtao
  * @description: 视频消息model
  * @version: 1.0
  */
-@Setter
-@Getter
+@Data
 public class VideoModel {
     /**
      * 通过素材管理中的接口上传多媒体文件，得到的id

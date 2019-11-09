@@ -1,7 +1,6 @@
 package me.zqt.wx.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 /**
  * @auther: zqtao
@@ -11,8 +10,7 @@ import lombok.Setter;
  * 将其封装为一个AccessToken对象，对象有二个属性：token和expiresIn
  * @version: 1.0
  */
-@Setter
-@Getter
+@Data
 public class AccessToken {
     /**
      * 获取到的凭证

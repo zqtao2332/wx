@@ -1,7 +1,6 @@
 package me.zqt.wx.model.menu;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 /**
  * @auther: zqtao
@@ -10,8 +9,7 @@ import lombok.Setter;
  * @version: 1.0
  */
 
-@Setter
-@Getter
+@Data
 public class BaseButton {
     /**
      * 菜单标题，不超过16个字节，子菜单不超过60个字节

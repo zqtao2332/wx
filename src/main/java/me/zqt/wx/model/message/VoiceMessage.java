@@ -1,8 +1,6 @@
 package me.zqt.wx.model.message;
 
-import lombok.Getter;
-import lombok.Setter;
-import me.zqt.wx.model.VideoModel;
+import lombok.Data;
 import me.zqt.wx.model.VoiceModel;
 
 /**
@@ -10,8 +8,7 @@ import me.zqt.wx.model.VoiceModel;
  * @description: 语音消息
  * @version: 1.0
  */
-@Setter
-@Getter
+@Data
 public class VoiceMessage extends BaseMessage {
     /**
      * 视频

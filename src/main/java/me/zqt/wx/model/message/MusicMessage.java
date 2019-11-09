@@ -1,17 +1,14 @@
 package me.zqt.wx.model.message;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import me.zqt.wx.model.MusicModel;
-import me.zqt.wx.model.message.BaseMessage;
 
 /**
  * @auther: zqtao
  * @description: 音乐消息
  * @version: 1.0
  */
-@Setter
-@Getter
+@Data
 public class MusicMessage extends BaseMessage {
     /**
      * 音乐

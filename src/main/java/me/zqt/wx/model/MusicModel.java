@@ -1,15 +1,13 @@
 package me.zqt.wx.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 /**
  * @auther: zqtao
  * @description: 音乐消息
  * @version: 1.0
  */
-@Setter
-@Getter
+@Data
 public class MusicModel {
     /**
      * 音乐名称

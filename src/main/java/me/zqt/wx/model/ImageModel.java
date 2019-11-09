@@ -1,15 +1,13 @@
 package me.zqt.wx.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 /**
  * @auther: zqtao
  * @description: 图片消息model
  * @version: 1.0
  */
-@Setter
-@Getter
+@Data
 public class ImageModel {
     /**
      *     媒体文件ID

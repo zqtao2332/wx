@@ -1,15 +1,13 @@
 package me.zqt.wx.model.message;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 /**
  * @auther: zqtao
  * @description: 消息常规基类：所有类型的消息都共通的特征
  * @version: 1.0
  */
-@Setter
-@Getter
+@Data
 public class BaseMessage {
     /**
      * 开发者微信号
