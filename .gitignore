@@ -3,3 +3,6 @@
 
 # .idea
 .idea
+
+# SignatureConstant
+src/main/java/me/zqt/wx/constan/SignatureConstant.java
