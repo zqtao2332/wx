@@ -14,10 +14,10 @@ import java.util.Date;
 public class MessageRespFactoryUtil<T extends BaseMessage> {
 
     /**
-     * @param messageModel
-     * @param fromUserName
-     * @param toUserName
-     * @param msgType
+     * @param messageModel 消息类型实例 如文本类型 TextMessage 对象
+     * @param fromUserName fromUserName
+     * @param toUserName toUserName
+     * @param msgType 消息类型
      * @return 根据传递的 messageModel 对象的类型，封装共有属性，返回需要的对象实例
      */
     public T getInstance(T messageModel, String fromUserName, String toUserName, String msgType) {

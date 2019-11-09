@@ -12,9 +12,6 @@ import java.util.Arrays;
  * @version: 1.0
  */
 public class SignUtil {
-    // 自定义的token
-//    private static final String TOKEN = "zqt23token";
-
     /**
      * 校验
      *
