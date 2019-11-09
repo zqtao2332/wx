@@ -6,7 +6,7 @@ import java.security.cert.X509Certificate;
 
 /**
  * @auther: zqtao
- * @description:
+ * @description: 证书管理器
  * @version: 1.0
  */
 public class MyX509TrustManagerUtil implements X509TrustManager {
