@@ -1,21 +1,19 @@
 package me.zqt.wx.utils;
 
 
+import lombok.extern.slf4j.Slf4j;
 import me.zqt.wx.constan.WechatInterface;
 import me.zqt.wx.model.AccessToken;
 import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @auther: zqtao
  * @description: 公众平台AccessToken 获取工具类
  * @version: 1.0
  */
-
+@Slf4j
 public class AccessTokenUtil {
-    private static Logger LOGGER = LoggerFactory.getLogger(AccessTokenUtil.class);
 
     /**
      * 获取access_token
@@ -39,7 +37,7 @@ public class AccessTokenUtil {
             } catch (JSONException e) {
                 accessToken = null;
                 // 获取token失败
-                LOGGER.error("获取token失败 errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));
+                log.error("获取token失败 errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));
             }
         }
         return accessToken;

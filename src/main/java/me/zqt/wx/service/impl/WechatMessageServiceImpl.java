@@ -1,16 +1,16 @@
 package me.zqt.wx.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
+import me.zqt.wx.constan.LogConstant;
 import me.zqt.wx.constan.MessageTypeConstant;
+import me.zqt.wx.model.ImageModel;
 import me.zqt.wx.model.VoiceModel;
 import me.zqt.wx.model.message.ImageMessage;
-import me.zqt.wx.model.ImageModel;
 import me.zqt.wx.model.message.TextMessage;
 import me.zqt.wx.model.message.VoiceMessage;
 import me.zqt.wx.service.WechatMessageService;
 import me.zqt.wx.utils.MessageRespFactoryUtil;
 import me.zqt.wx.utils.WechatMessageUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,13 +22,12 @@ import java.util.Map;
  * @version: 1.0
  */
 @Service
+@Slf4j
 public class WechatMessageServiceImpl implements WechatMessageService {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(WechatMessageServiceImpl.class);
 
     @Override
     public String newMessageRequest(HttpServletRequest request) {
-        LOGGER.info("------------start handle wx message  -------------");
+        log.info(LogConstant.LOG_INFO.replace("INFO","开始处理消息"));
         String respMsg = null;
 
         try {
@@ -41,24 +40,24 @@ public class WechatMessageServiceImpl implements WechatMessageService {
             // 消息类型
             String msgType = requestMap.get("MsgType");
 
-            LOGGER.info("FromUserName is:" + fromUserName + ", ToUserName is:" + toUserName + ", MsgType is:" + msgType);
+            log.info("FromUserName is:" + fromUserName + ", ToUserName is:" + toUserName + ", MsgType is:" + msgType);
 
             // 文本消息
             if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_TEXT)) {
                 // 消息内容
                 String content = requestMap.get("Content");
-                LOGGER.info("这是一个文本内容" + content);
+                log.info("这是一个文本内容" + content);
                 //自动回复
                 MessageRespFactoryUtil<TextMessage> factoryUtil = new MessageRespFactoryUtil<>();
                 TextMessage text = factoryUtil.getInstance(new TextMessage(), fromUserName, toUserName, msgType);
                 text.setContent("这是一个文本内容" + content);
                 respMsg = WechatMessageUtil.textMessageToXml(text);
 
-                LOGGER.info(respMsg);
+                log.info(respMsg);
             } else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_IMAGE)) {
                 // 图片消息
                 String mediaId = requestMap.get("MediaId");
-                LOGGER.info("----------------    这个一个图片    ： " + mediaId);
+                log.info("----------------    这个一个图片    ： " + mediaId);
 
                 MessageRespFactoryUtil<ImageMessage> factoryUtil = new MessageRespFactoryUtil<>();
                 ImageMessage image = factoryUtil.getInstance(new ImageMessage(), fromUserName, toUserName, msgType);
@@ -68,10 +67,10 @@ public class WechatMessageServiceImpl implements WechatMessageService {
                 image.setImage(imageModel);
 
                 respMsg = WechatMessageUtil.imageMessageToXml(image);
-                LOGGER.info(respMsg);
+                log.info(respMsg);
             } else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_VOICE)) {
                 String mediaId = requestMap.get("MediaId");
-                LOGGER.info("----------------    这个一条语音    ： " + mediaId);
+                log.info("----------------    这个一条语音    ： " + mediaId);
 
                 MessageRespFactoryUtil<VoiceMessage> factoryUtil = new MessageRespFactoryUtil<>();
                 VoiceMessage voice = factoryUtil.getInstance(new VoiceMessage(), fromUserName, toUserName, msgType);
@@ -81,11 +80,13 @@ public class WechatMessageServiceImpl implements WechatMessageService {
                 voice.setVoice(voiceModel);
 
                 respMsg = WechatMessageUtil.voiceMessageToXml(voice);
-                LOGGER.info(respMsg);
+                log.info(respMsg);
             }
 
         } catch (Exception e) {
-            LOGGER.error("error......");
+            log.error(LogConstant.LOG_ERROR.replace("ERROR", e.getMessage()));
+        } finally {
+            log.info(LogConstant.LOG_INFO.replace("INFO","开始处理消息"));
         }
         return respMsg;
     }

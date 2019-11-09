@@ -1,6 +1,7 @@
 package me.zqt.wx.utils;
 
 
+import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,9 +30,8 @@ import java.net.URL;
  * 3）支持参数提交，也支持无参数的情况；
  * @version: 1.0
  */
+@Slf4j
 public class HttpRequestUtil {
-    private static Logger LOGGER = LoggerFactory.getLogger(HttpRequestUtil.class);
-
     /**
      * 发起https请求并获取结果
      *
@@ -89,9 +89,9 @@ public class HttpRequestUtil {
             httpUrlConn.disconnect();
             jsonObject = JSONObject.fromObject(buffer.toString());
         } catch (ConnectException ce) {
-            LOGGER.error("Weixin server connection timed out.");
+            log.error("Weixin server connection timed out.");
         } catch (Exception e) {
-            LOGGER.error("https request error:{}", e);
+            log.error("https request error:{}", e);
         }
         return jsonObject;
     }

@@ -1,12 +1,12 @@
 package me.zqt.wx.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
+import me.zqt.wx.constan.LogConstant;
 import me.zqt.wx.constan.WechatInterface;
 import me.zqt.wx.model.menu.Menu;
 import me.zqt.wx.service.MenuManagerService;
 import me.zqt.wx.utils.HttpRequestUtil;
 import net.sf.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 /**
@@ -14,8 +14,8 @@ import org.slf4j.LoggerFactory;
  * @description: 微信自定义菜单核心服务实现类
  * @version: 1.0
  */
+@Slf4j
 public class MenuManagerServiceImpl implements MenuManagerService {
-    private static Logger LOGGER = LoggerFactory.getLogger(MenuManagerServiceImpl.class);
 
     /**
      * 创建菜单
@@ -26,6 +26,8 @@ public class MenuManagerServiceImpl implements MenuManagerService {
      */
     @Override
     public int createMenu(Menu menu, String accessToken) {
+        log.info(LogConstant.LOG_INFO.replace("INFO","开始创建菜单"));
+
         int result = 0;
         // MENU_CREATE_URL菜单创建（POST） 限100（次/天）
         // 拼装创建菜单的url
@@ -38,9 +40,10 @@ public class MenuManagerServiceImpl implements MenuManagerService {
         if (null != jsonObject) {
             if (0 != jsonObject.getInt("errcode")) {
                 result = jsonObject.getInt("errcode");
-                LOGGER.error("创建菜单失败 errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));
+                log.error("======>>>   创建菜单失败 errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));
             }
         }
+        log.info(LogConstant.LOG_INFO.replace("INFO","结束创建菜单"));
         return result;
     }
 
@@ -61,7 +64,7 @@ public class MenuManagerServiceImpl implements MenuManagerService {
         if (null != jsonObject) {
             if (0 != jsonObject.getInt("errcode")) {
                 result = jsonObject.getInt("errcode");
-                LOGGER.error("删除菜单失败 errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));
+                log.error("======>>>   删除菜单失败 errcode:{} errmsg:{}", jsonObject.getInt("errcode"), jsonObject.getString("errmsg"));
             }
         }
         return result;

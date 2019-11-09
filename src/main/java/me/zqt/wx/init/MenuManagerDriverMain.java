@@ -1,24 +1,23 @@
 package me.zqt.wx.init;
 
+import lombok.extern.slf4j.Slf4j;
 import me.zqt.wx.constan.SignatureConstant;
 import me.zqt.wx.model.AccessToken;
 import me.zqt.wx.model.menu.*;
 import me.zqt.wx.service.MenuManagerService;
 import me.zqt.wx.service.impl.MenuManagerServiceImpl;
 import me.zqt.wx.utils.AccessTokenUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @auther: zqtao
  * @description: 菜单管理器类: 初始化自定义菜单
  * @version: 1.0
  */
+@Slf4j
 public class MenuManagerDriverMain {
-    private static Logger LOGGER = LoggerFactory.getLogger(MenuManagerDriverMain.class);
 
     public static void main(String[] args) {
-
+        log.info("----------------开始初始化自定义菜单------------------");
         // 第三方用户唯一凭证
         String appId = SignatureConstant.APP_ID;
         // 第三方用户唯一凭证密钥
@@ -26,19 +25,21 @@ public class MenuManagerDriverMain {
 
         // 调用接口获取access_token
         AccessToken at = AccessTokenUtil.getAccessToken(appId, appSecret);
-        LOGGER.info("-------------AccessToken is : " + at.getToken());
+        log.info("-------------AccessToken is : " + at.getToken());
 
         if (at != null) {
             MenuManagerService menuManagerService = new MenuManagerServiceImpl();
             // 调用接口创建菜单
             int result = menuManagerService.createMenu(getMenu(), at.getToken());
-//            int result = menuManagerService.deleteMenu(at.getToken());
+            // 调用接口删除菜单
+            // int result = menuManagerService.deleteMenu(at.getToken());
             // 判断菜单创建结果
             if (0 == result)
-                LOGGER.info("菜单创建成功！");
+                log.info("菜单操作成功！");
             else
-                LOGGER.info("菜单创建失败，错误码：" + result);
+                log.info("菜单操作失败，错误码：" + result);
         }
+        log.info("----------------结束初始化自定义菜单------------------");
     }
 
     /**

@@ -1,9 +1,9 @@
 package me.zqt.wx.controller;
 
+import lombok.extern.slf4j.Slf4j;
+import me.zqt.wx.constan.LogConstant;
 import me.zqt.wx.service.WechatMessageService;
 import me.zqt.wx.utils.SignUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,9 +22,9 @@ import java.io.UnsupportedEncodingException;
  */
 @RestController
 @RequestMapping("/wechat")
+@Slf4j
 public class WechatController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(WechatController.class);
     @Autowired
     WechatMessageService wechatMessageService;
 
@@ -33,7 +33,7 @@ public class WechatController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public void get(HttpServletRequest request, HttpServletResponse response) {
-        LOGGER.info("----------------开始处理微信签名校验------------------");
+        log.info(LogConstant.LOG_INFO.replace("INFO", "开始处理微信签名校验"));
         // 微信加密签名，signature结合了开发者填写的token参数和请求中的timestamp参数、nonce参数。
         String signature = request.getParameter("signature");
         // 时间戳
@@ -42,7 +42,7 @@ public class WechatController {
         String nonce = request.getParameter("nonce");
         // 随机字符串
         String echostr = request.getParameter("echostr");
-        LOGGER.info("signature is :" + signature
+        log.info("signature is :" + signature
                 + "\ntimestamp is :" + timestamp
                 + "\nnonce is :" + nonce
                 + "\nechostr is :" + echostr);
@@ -56,22 +56,23 @@ public class WechatController {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            LOGGER.error(e.getMessage());
+            log.error(LogConstant.LOG_ERROR.replace("ERROR", e.getMessage()));
         } finally {
             out.close();
             out = null;
-            LOGGER.info("----------------结束处理微信签名校验------------------");
+            log.info(LogConstant.LOG_INFO.replace("INFO", "结束处理微信签名校验"));
         }
     }
 
     /**
      * 处理各种请求
+     *
      * @param request
      * @param response
      */
     @RequestMapping(method = RequestMethod.POST)
     public void post(HttpServletRequest request, HttpServletResponse response) {
-        LOGGER.info("----------------开始处理微信发过来的消息------------------");
+        log.info(LogConstant.LOG_INFO.replace("INFO", "开始处理微信发过来的消息"));
         try {
             // 微信服务器POST消息时用的是UTF-8编码，在接收时也要用同样的编码，否则中文会乱码；
             request.setCharacterEncoding("UTF-8");
@@ -79,7 +80,7 @@ public class WechatController {
             response.setCharacterEncoding("UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-            LOGGER.error("编码错误");
+            log.info(LogConstant.LOG_ERROR.replace("ERROR", "编码错误"));
         }
 
         // 调用核心业务类接收消息、处理消息
@@ -92,11 +93,11 @@ public class WechatController {
             out.print(respMessage);
         } catch (IOException e) {
             e.printStackTrace();
-            LOGGER.error(e.getMessage());
+            log.error(LogConstant.LOG_ERROR.replace("ERROR", e.getMessage()));
         } finally {
             out.close();
             out = null;
-            LOGGER.info("----------------结束处理微信发过来的消息------------------");
+            log.info(LogConstant.LOG_INFO.replace("INFO", "结束处理微信发过来的消息"));
         }
     }
 
