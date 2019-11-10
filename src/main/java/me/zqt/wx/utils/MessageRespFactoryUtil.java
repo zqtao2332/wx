@@ -1,6 +1,6 @@
 package me.zqt.wx.utils;
 
-import me.zqt.wx.model.message.BaseMessage;
+import me.zqt.wx.model.message.BasicMessage;
 
 import java.util.Date;
 
@@ -11,7 +11,7 @@ import java.util.Date;
  * T extends BaseMessage
  * @version: 1.0
  */
-public class MessageRespFactoryUtil<T extends BaseMessage> {
+public class MessageRespFactoryUtil<T extends BasicMessage> {
 
     /**
      * @param messageModel 消息类型实例 如文本类型 TextMessage 对象

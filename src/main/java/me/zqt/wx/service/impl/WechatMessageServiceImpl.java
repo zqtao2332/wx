@@ -5,9 +5,9 @@ import me.zqt.wx.constant.LogConstant;
 import me.zqt.wx.constant.MessageTypeConstant;
 import me.zqt.wx.model.ImageModel;
 import me.zqt.wx.model.VoiceModel;
-import me.zqt.wx.model.message.ImageMessage;
-import me.zqt.wx.model.message.TextMessage;
-import me.zqt.wx.model.message.VoiceMessage;
+import me.zqt.wx.model.message.resp.ImageRespMessage;
+import me.zqt.wx.model.message.resp.TextRespMessage;
+import me.zqt.wx.model.message.resp.VoiceRespMessage;
 import me.zqt.wx.service.WechatMessageService;
 import me.zqt.wx.utils.MessageRespFactoryUtil;
 import me.zqt.wx.utils.WechatMessageUtil;
@@ -48,8 +48,8 @@ public class WechatMessageServiceImpl implements WechatMessageService {
                 String content = requestMap.get("Content");
                 log.info("这是一个文本内容" + content);
                 //自动回复
-                MessageRespFactoryUtil<TextMessage> factoryUtil = new MessageRespFactoryUtil<>();
-                TextMessage text = factoryUtil.getInstance(new TextMessage(), fromUserName, toUserName, msgType);
+                MessageRespFactoryUtil<TextRespMessage> factoryUtil = new MessageRespFactoryUtil<>();
+                TextRespMessage text = factoryUtil.getInstance(new TextRespMessage(), fromUserName, toUserName, msgType);
                 text.setContent("这是一个文本内容" + content);
                 respMsg = WechatMessageUtil.textMessageToXml(text);
 
@@ -59,8 +59,8 @@ public class WechatMessageServiceImpl implements WechatMessageService {
                 String mediaId = requestMap.get("MediaId");
                 log.info("----------------    这个一个图片    ： " + mediaId);
 
-                MessageRespFactoryUtil<ImageMessage> factoryUtil = new MessageRespFactoryUtil<>();
-                ImageMessage image = factoryUtil.getInstance(new ImageMessage(), fromUserName, toUserName, msgType);
+                MessageRespFactoryUtil<ImageRespMessage> factoryUtil = new MessageRespFactoryUtil<>();
+                ImageRespMessage image = factoryUtil.getInstance(new ImageRespMessage(), fromUserName, toUserName, msgType);
 
                 ImageModel imageModel = new ImageModel();
                 imageModel.setMediaId(mediaId);
@@ -72,8 +72,8 @@ public class WechatMessageServiceImpl implements WechatMessageService {
                 String mediaId = requestMap.get("MediaId");
                 log.info("----------------    这个一条语音    ： " + mediaId);
 
-                MessageRespFactoryUtil<VoiceMessage> factoryUtil = new MessageRespFactoryUtil<>();
-                VoiceMessage voice = factoryUtil.getInstance(new VoiceMessage(), fromUserName, toUserName, msgType);
+                MessageRespFactoryUtil<VoiceRespMessage> factoryUtil = new MessageRespFactoryUtil<>();
+                VoiceRespMessage voice = factoryUtil.getInstance(new VoiceRespMessage(), fromUserName, toUserName, msgType);
 
                 VoiceModel voiceModel = new VoiceModel();
                 voiceModel.setMediaId(mediaId);

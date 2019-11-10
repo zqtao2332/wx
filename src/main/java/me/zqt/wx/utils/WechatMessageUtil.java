@@ -5,9 +5,9 @@ import com.thoughtworks.xstream.core.util.QuickWriter;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.io.xml.XppDriver;
-import me.zqt.wx.model.message.ImageMessage;
-import me.zqt.wx.model.message.TextMessage;
-import me.zqt.wx.model.message.VoiceMessage;
+import me.zqt.wx.model.message.resp.ImageRespMessage;
+import me.zqt.wx.model.message.resp.TextRespMessage;
+import me.zqt.wx.model.message.resp.VoiceRespMessage;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -89,7 +89,7 @@ public class WechatMessageUtil {
      * @return xml
      * @Description: 文本消息对象转换成xml
      */
-    public static String textMessageToXml(TextMessage textMessage) {
+    public static String textMessageToXml(TextRespMessage textMessage) {
         xstream.alias("xml", textMessage.getClass());
         return xstream.toXML(textMessage);
     }
@@ -98,7 +98,7 @@ public class WechatMessageUtil {
      * @param imageMessage
      * @Description: 图片消息对象转换成xml
      */
-    public static String imageMessageToXml(ImageMessage imageMessage) {
+    public static String imageMessageToXml(ImageRespMessage imageMessage) {
         xstream.alias("xml", imageMessage.getClass());
         return xstream.toXML(imageMessage);
     }
@@ -107,9 +107,9 @@ public class WechatMessageUtil {
      * @param @param voiceMessage
      * @Description: 语音消息对象转换成xml
      */
-    public static String voiceMessageToXml(VoiceMessage voiceMessage) {
-        xstream.alias("xml", voiceMessage.getClass());
-        return xstream.toXML(voiceMessage);
+    public static String voiceMessageToXml(VoiceRespMessage voiceReqMessage) {
+        xstream.alias("xml", voiceReqMessage.getClass());
+        return xstream.toXML(voiceReqMessage);
     }
 
 }
