@@ -4,9 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import me.zqt.wx.constant.LogConstant;
 import me.zqt.wx.constant.MessageTypeConstant;
 import me.zqt.wx.model.ImageModel;
+import me.zqt.wx.model.VideoModel;
 import me.zqt.wx.model.VoiceModel;
 import me.zqt.wx.model.message.resp.ImageRespMessage;
 import me.zqt.wx.model.message.resp.TextRespMessage;
+import me.zqt.wx.model.message.resp.VideoRespMessage;
 import me.zqt.wx.model.message.resp.VoiceRespMessage;
 import me.zqt.wx.service.WechatMessageService;
 import me.zqt.wx.utils.MessageRespFactoryUtil;
@@ -27,7 +29,7 @@ public class WechatMessageServiceImpl implements WechatMessageService {
 
     @Override
     public String newMessageRequest(HttpServletRequest request) {
-        log.info(LogConstant.LOG_INFO.replace("INFO","开始处理消息"));
+        log.info(LogConstant.LOG_INFO.replace("INFO", "开始处理消息"));
         String respMsg = null;
 
         try {
@@ -81,12 +83,27 @@ public class WechatMessageServiceImpl implements WechatMessageService {
 
                 respMsg = WechatMessageUtil.voiceMessageToXml(voice);
                 log.info(respMsg);
+            } else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_VIDEO)) {
+                String mediaId = requestMap.get("MediaId");
+                log.info("----------------    这个一个视频    ： " + mediaId);
+
+                MessageRespFactoryUtil<VideoRespMessage> factoryUtil = new MessageRespFactoryUtil<>();
+                VideoRespMessage video = factoryUtil.getInstance(new VideoRespMessage(), fromUserName, toUserName, msgType);
+
+                VideoModel videoModel = new VideoModel();
+                videoModel.setMediaId(mediaId);
+                videoModel.setTitle("test");
+                videoModel.setDescription("this is a test video");
+                video.setVideo(videoModel);
+
+                respMsg = WechatMessageUtil.videoMessageToXml(video);
+                log.info(respMsg);
             }
 
         } catch (Exception e) {
             log.error(LogConstant.LOG_ERROR.replace("ERROR", e.getMessage()));
         } finally {
-            log.info(LogConstant.LOG_INFO.replace("INFO","开始处理消息"));
+            log.info(LogConstant.LOG_INFO.replace("INFO", "开始处理消息"));
         }
         return respMsg;
     }

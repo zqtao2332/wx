@@ -7,6 +7,7 @@ import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.io.xml.XppDriver;
 import me.zqt.wx.model.message.resp.ImageRespMessage;
 import me.zqt.wx.model.message.resp.TextRespMessage;
+import me.zqt.wx.model.message.resp.VideoRespMessage;
 import me.zqt.wx.model.message.resp.VoiceRespMessage;
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -95,21 +96,30 @@ public class WechatMessageUtil {
     }
 
     /**
-     * @param imageMessage
+     * @param imageRespMessage
      * @Description: 图片消息对象转换成xml
      */
-    public static String imageMessageToXml(ImageRespMessage imageMessage) {
-        xstream.alias("xml", imageMessage.getClass());
-        return xstream.toXML(imageMessage);
+    public static String imageMessageToXml(ImageRespMessage imageRespMessage) {
+        xstream.alias("xml", imageRespMessage.getClass());
+        return xstream.toXML(imageRespMessage);
     }
 
     /**
      * @param @param voiceMessage
      * @Description: 语音消息对象转换成xml
      */
-    public static String voiceMessageToXml(VoiceRespMessage voiceReqMessage) {
-        xstream.alias("xml", voiceReqMessage.getClass());
-        return xstream.toXML(voiceReqMessage);
+    public static String voiceMessageToXml(VoiceRespMessage voiceRespMessage) {
+        xstream.alias("xml", voiceRespMessage.getClass());
+        return xstream.toXML(voiceRespMessage);
+    }
+
+    /**
+     * @param @param videoMessage
+     * @Description: 视频消息对象转换成xml
+     */
+    public static String videoMessageToXml(VideoRespMessage videoRespMessage) {
+        xstream.alias("xml", videoRespMessage.getClass());
+        return xstream.toXML(videoRespMessage);
     }
 
 }
