@@ -1,8 +1,8 @@
 package me.zqt.wx.init;
 
 import lombok.extern.slf4j.Slf4j;
-import me.zqt.wx.constan.LogConstant;
-import me.zqt.wx.constan.SignatureConstant;
+import me.zqt.wx.constant.LogConstant;
+import me.zqt.wx.constant.SignatureConstant;
 import me.zqt.wx.model.AccessToken;
 import me.zqt.wx.model.menu.*;
 import me.zqt.wx.service.MenuManagerService;

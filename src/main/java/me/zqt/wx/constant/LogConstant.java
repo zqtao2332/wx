@@ -1,8 +1,8 @@
-package me.zqt.wx.constan;
+package me.zqt.wx.constant;
 
 /**
  * @auther: zqtao
- * @description:
+ * @description: 日志输入规范常量类
  * @version: 1.0
  */
 public class LogConstant {

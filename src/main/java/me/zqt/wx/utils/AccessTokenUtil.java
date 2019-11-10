@@ -2,7 +2,7 @@ package me.zqt.wx.utils;
 
 
 import lombok.extern.slf4j.Slf4j;
-import me.zqt.wx.constan.WechatInterface;
+import me.zqt.wx.constant.WechatInterface;
 import me.zqt.wx.model.AccessToken;
 import net.sf.json.JSONException;
 import net.sf.json.JSONObject;

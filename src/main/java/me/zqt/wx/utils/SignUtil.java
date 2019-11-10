@@ -1,6 +1,6 @@
 package me.zqt.wx.utils;
 
-import me.zqt.wx.constan.SignatureConstant;
+import me.zqt.wx.constant.SignatureConstant;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

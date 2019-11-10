@@ -1,4 +1,4 @@
-package me.zqt.wx.constan;
+package me.zqt.wx.constant;
 
 /**
  * @auther: zqtao

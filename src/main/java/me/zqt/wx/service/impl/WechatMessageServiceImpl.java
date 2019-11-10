@@ -1,8 +1,8 @@
 package me.zqt.wx.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
-import me.zqt.wx.constan.LogConstant;
-import me.zqt.wx.constan.MessageTypeConstant;
+import me.zqt.wx.constant.LogConstant;
+import me.zqt.wx.constant.MessageTypeConstant;
 import me.zqt.wx.model.ImageModel;
 import me.zqt.wx.model.VoiceModel;
 import me.zqt.wx.model.message.ImageMessage;

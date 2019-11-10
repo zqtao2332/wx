@@ -1,7 +1,7 @@
 package me.zqt.wx.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import me.zqt.wx.constan.LogConstant;
+import me.zqt.wx.constant.LogConstant;
 import me.zqt.wx.service.WechatMessageService;
 import me.zqt.wx.utils.SignUtil;
 import org.springframework.beans.factory.annotation.Autowired;

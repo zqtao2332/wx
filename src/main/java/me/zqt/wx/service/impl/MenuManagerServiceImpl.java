@@ -1,8 +1,8 @@
 package me.zqt.wx.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
-import me.zqt.wx.constan.LogConstant;
-import me.zqt.wx.constan.WechatInterface;
+import me.zqt.wx.constant.LogConstant;
+import me.zqt.wx.constant.WechatInterface;
 import me.zqt.wx.model.menu.Menu;
 import me.zqt.wx.service.MenuManagerService;
 import me.zqt.wx.utils.HttpRequestUtil;
