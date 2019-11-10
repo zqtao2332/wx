@@ -8,7 +8,7 @@ import lombok.Data;
  * @version: 1.0
  */
 @Data
-public class BaseMessage {
+public class BasicMessage {
     /**
      * 开发者微信号
      */
@@ -25,12 +25,4 @@ public class BaseMessage {
      * 消息类型（text/image/location/link）
      */
     private String MsgType;
-    /**
-     * 消息id，64位整型
-     */
-    private long MsgId;
-    /**
-     * 位0x0001被标志时，星标刚收到的消息
-     */
-    private int FuncFlag;
 }
