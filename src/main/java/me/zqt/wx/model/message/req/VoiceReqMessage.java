@@ -18,4 +18,9 @@ public class VoiceReqMessage extends ReqBasicMessage {
      * 语音格式，如amr，speex等
      */
     private String Format;
+
+    /**
+     * 语音识别结果，UTF8编码
+     */
+    private String Recognition;
 }
