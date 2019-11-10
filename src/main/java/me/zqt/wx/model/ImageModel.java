@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class ImageModel {
     /**
-     *     媒体文件ID
+     * 媒体文件ID
      */
     private String MediaId;
 }
