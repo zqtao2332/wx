@@ -7,9 +7,9 @@
 
 **开发所用测试公众号，可选择关注，实时查看版本更新内容，所有的开发测试都是在测试公众号进行。**
 
-![怪兽疯了.jpg](https://upload-images.jianshu.io/upload_images/18567339-d4f4047d4f699627.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+<img src=" http://resource.zqtaotao.cn/公众号/PC测试号 .png" alt="PC测试号 " style="zoom:80%;" />
 
-​												**注**：二维码无法显示请点击：**[怪兽疯了](http://resource.zqtaotao.cn/公众号/怪兽疯了.jpg)**    ,      **[测试号](http://resource.zqtaotao.cn/公众号/PC测试号 .png)**
+​												**注**：二维码无法显示请点击：**[怪兽疯了](http://resource.zqtaotao.cn/公众号/怪兽疯了.jpg)**    ,      **[测试号](http://resource.zqtaotao.cn/公众号/PC测试号.png)**
 
 ### 开发工具
 
