@@ -7,7 +7,7 @@
 
 **开发所用测试公众号，可选择关注，实时查看版本更新内容，所有的开发测试都是在测试公众号进行。**
 
-<img src=" http://resource.zqtaotao.cn/公众号/PC测试号 .png" alt="PC测试号 " style="zoom:80%;" />
+<img src=" http://resource.zqtaotao.cn/公众号/PC测试号.png" alt="PC测试号 " style="zoom:80%;" />
 
 ​												**注**：二维码无法显示请点击：**[怪兽疯了](http://resource.zqtaotao.cn/公众号/怪兽疯了.jpg)**    ,      **[测试号](http://resource.zqtaotao.cn/公众号/PC测试号.png)**
 
