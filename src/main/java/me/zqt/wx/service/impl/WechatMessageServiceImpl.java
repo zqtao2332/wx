@@ -53,7 +53,7 @@ public class WechatMessageServiceImpl implements WechatMessageService {
                 MessageRespFactoryUtil<TextRespMessage> factoryUtil = new MessageRespFactoryUtil<>();
                 TextRespMessage text = factoryUtil.getInstance(new TextRespMessage(), fromUserName, toUserName, msgType);
                 text.setContent("这是一个文本内容" + content);
-                respMsg = WechatMessageUtil.textMessageToXml(text);
+                respMsg = WechatMessageUtil.parseObjMessageToXml(text);
 
                 log.info(respMsg);
             } else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_IMAGE)) {
@@ -68,7 +68,8 @@ public class WechatMessageServiceImpl implements WechatMessageService {
                 imageModel.setMediaId(mediaId);
                 image.setImage(imageModel);
 
-                respMsg = WechatMessageUtil.imageMessageToXml(image);
+//                respMsg = WechatMessageUtil.imageMessageToXml(image);
+                respMsg = WechatMessageUtil.parseObjMessageToXml(image);
                 log.info(respMsg);
             } else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_VOICE)) {
                 String mediaId = requestMap.get("MediaId");
@@ -81,7 +82,7 @@ public class WechatMessageServiceImpl implements WechatMessageService {
                 voiceModel.setMediaId(mediaId);
                 voice.setVoice(voiceModel);
 
-                respMsg = WechatMessageUtil.voiceMessageToXml(voice);
+                respMsg = WechatMessageUtil.parseObjMessageToXml(voice);
                 log.info(respMsg);
             } else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_VIDEO)) {
                 String mediaId = requestMap.get("MediaId");
@@ -96,7 +97,7 @@ public class WechatMessageServiceImpl implements WechatMessageService {
                 videoModel.setDescription("this is a test video");
                 video.setVideo(videoModel);
 
-                respMsg = WechatMessageUtil.videoMessageToXml(video);
+                respMsg = WechatMessageUtil.parseObjMessageToXml(video);
                 log.info(respMsg);
             }
 

@@ -5,6 +5,7 @@ import com.thoughtworks.xstream.core.util.QuickWriter;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.io.xml.XppDriver;
+import me.zqt.wx.model.message.BasicMessage;
 import me.zqt.wx.model.message.resp.ImageRespMessage;
 import me.zqt.wx.model.message.resp.TextRespMessage;
 import me.zqt.wx.model.message.resp.VideoRespMessage;
@@ -53,7 +54,6 @@ public class WechatMessageUtil {
         // 释放资源
         inputStream.close();
         inputStream = null;
-
         return map;
     }
 
@@ -90,36 +90,19 @@ public class WechatMessageUtil {
      * @return xml
      * @Description: 文本消息对象转换成xml
      */
-    public static String textMessageToXml(TextRespMessage textMessage) {
+    /*public static String textMessageToXml(TextRespMessage textMessage) {
         xstream.alias("xml", textMessage.getClass());
         return xstream.toXML(textMessage);
-    }
+    }*/
 
     /**
-     * @param imageRespMessage
-     * @Description: 图片消息对象转换成xml
+     * 将消息对象转换成 xml 字符串
+     *
+     * @param message 消息对象
+     * @return xml 字符串
      */
-    public static String imageMessageToXml(ImageRespMessage imageRespMessage) {
-        xstream.alias("xml", imageRespMessage.getClass());
-        return xstream.toXML(imageRespMessage);
+    public static String parseObjMessageToXml(BasicMessage message) {
+        xstream.alias("xml", message.getClass());
+        return xstream.toXML(message);
     }
-
-    /**
-     * @param @param voiceMessage
-     * @Description: 语音消息对象转换成xml
-     */
-    public static String voiceMessageToXml(VoiceRespMessage voiceRespMessage) {
-        xstream.alias("xml", voiceRespMessage.getClass());
-        return xstream.toXML(voiceRespMessage);
-    }
-
-    /**
-     * @param @param videoMessage
-     * @Description: 视频消息对象转换成xml
-     */
-    public static String videoMessageToXml(VideoRespMessage videoRespMessage) {
-        xstream.alias("xml", videoRespMessage.getClass());
-        return xstream.toXML(videoRespMessage);
-    }
-
 }
