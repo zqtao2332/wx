@@ -9,7 +9,7 @@
 
 <img src=" http://resource.zqtaotao.cn/公众号/PC测试号 .png" alt="PC测试号 " style="zoom:80%;" />
 
-
+​												**注**：二维码无法显示请点击：**[怪兽疯了](http://resource.zqtaotao.cn/公众号/怪兽疯了.jpg)**    ,      **[测试号](http://resource.zqtaotao.cn/公众号/PC测试号 .png)**
 
 ### 开发工具
 
@@ -19,8 +19,6 @@
 | 本地开发系统 | window10 家庭版           |
 | 线上测试系统 | Linux centos7  / Ubuntu19 |
 | 内网映射工具 | ngrok window版            |
-|              |                           |
-|              |                           |
 
 
 
@@ -30,6 +28,25 @@
 | :----------------: |
 |    自定义菜单栏    |
 | 自动回复文本、语音 |
+
+### 下载运行
+
+选择要下载的版本，在GitHub上点击：`Clone or download`
+
+修改`me.zqt.wx.constant.SignatureConstant.java`替换填写自己的微信公众号信息。
+
+```
+// 开发者自定义token
+public static final String TOKEN = "随意填写如：mytoken123";
+// 第三方用户唯一凭证
+public static final String APP_ID = "xxxxxxxxxxxxxxxxxx";
+// 第三方用户唯一凭证密钥
+public static final String APP_SECRET = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+```
+
+运行   **`me.zqt.wx.WxApplication`**   即可！
+
+
 
 ### 版本下载
 
