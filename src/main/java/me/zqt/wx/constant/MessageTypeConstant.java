@@ -47,6 +47,11 @@ public class MessageTypeConstant {
     public static final String REQ_MESSAGE_TYPE_VOICE = "voice";
 
     /**
+     * 请求消息类型：视频
+     */
+    public static final String REQ_MESSAGE_TYPE_VIDEO = "video";
+
+    /**
      * 请求消息类型：推送
      */
     public static final String REQ_MESSAGE_TYPE_EVENT = "event";
