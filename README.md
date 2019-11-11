@@ -3,11 +3,11 @@
 
 **更多内容信息，请关注微信公众号：怪兽疯了**
 
-<img src="C:\Users\tao\Desktop\怪兽疯了.jpg" alt="怪兽疯了" style="zoom: 45%;" />
+<img src=" http://resource.zqtaotao.cn/公众号/怪兽疯了.jpg " alt="怪兽疯了" style="zoom: 45%;" />
 
 **开发所用测试公众号，可选择关注，实时查看版本更新内容，所有的开发测试都是在测试公众号进行。**
 
-![PC测试号 ](C:\Users\tao\Desktop\PC测试号 .png)
+![PC测试号 ]( http://resource.zqtaotao.cn/公众号/PC测试号 .png )
 
 
 
