@@ -6,10 +6,6 @@ import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.io.xml.XppDriver;
 import me.zqt.wx.model.message.BasicMessage;
-import me.zqt.wx.model.message.resp.ImageRespMessage;
-import me.zqt.wx.model.message.resp.TextRespMessage;
-import me.zqt.wx.model.message.resp.VideoRespMessage;
-import me.zqt.wx.model.message.resp.VoiceRespMessage;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -26,12 +22,12 @@ import java.util.Map;
  * @description: 消息工具类
  * @version: 1.0
  */
-public class WechatMessageUtil {
+public class WechatMessageXMLParseUtil {
     /**
      * @param @param  request
      * @param @return 微信XML 请求解析结果
      * @param @throws Exception
-     * @Description: 解析微信发来的请求（XML）, 并将结果封装在 Map 中返回
+     * @Description: 解析微信发来的请求（XML数据包）, 并将结果封装在 Map 中返回
      */
     public static Map<String, String> parseXml(HttpServletRequest request)
             throws Exception {
@@ -58,7 +54,7 @@ public class WechatMessageUtil {
     }
 
     /**
-     * 对象到xml的处理
+     * 扩展xstream，使其支持微信消息XML数据包中的CDATA块
      */
     private static XStream xstream = new XStream(new XppDriver() {
         public HierarchicalStreamWriter createWriter(Writer out) {

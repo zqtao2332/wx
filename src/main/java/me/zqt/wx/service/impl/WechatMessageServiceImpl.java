@@ -12,7 +12,7 @@ import me.zqt.wx.model.message.resp.VideoRespMessage;
 import me.zqt.wx.model.message.resp.VoiceRespMessage;
 import me.zqt.wx.service.WechatMessageService;
 import me.zqt.wx.utils.MessageRespFactoryUtil;
-import me.zqt.wx.utils.WechatMessageUtil;
+import me.zqt.wx.utils.WechatMessageXMLParseUtil;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +34,7 @@ public class WechatMessageServiceImpl implements WechatMessageService {
 
         try {
             // xml请求解析
-            Map<String, String> requestMap = WechatMessageUtil.parseXml(request);
+            Map<String, String> requestMap = WechatMessageXMLParseUtil.parseXml(request);
             // 发送方帐号（open_id）
             String fromUserName = requestMap.get("FromUserName");
             // 公众帐号
@@ -53,7 +53,7 @@ public class WechatMessageServiceImpl implements WechatMessageService {
                 MessageRespFactoryUtil<TextRespMessage> factoryUtil = new MessageRespFactoryUtil<>();
                 TextRespMessage text = factoryUtil.getInstance(new TextRespMessage(), fromUserName, toUserName, msgType);
                 text.setContent("这是一个文本内容" + content);
-                respMsg = WechatMessageUtil.parseObjMessageToXml(text);
+                respMsg = WechatMessageXMLParseUtil.parseObjMessageToXml(text);
 
                 log.info(respMsg);
             } else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_IMAGE)) {
@@ -69,7 +69,7 @@ public class WechatMessageServiceImpl implements WechatMessageService {
                 image.setImage(imageModel);
 
 //                respMsg = WechatMessageUtil.imageMessageToXml(image);
-                respMsg = WechatMessageUtil.parseObjMessageToXml(image);
+                respMsg = WechatMessageXMLParseUtil.parseObjMessageToXml(image);
                 log.info(respMsg);
             } else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_VOICE)) {
                 String mediaId = requestMap.get("MediaId");
@@ -82,7 +82,7 @@ public class WechatMessageServiceImpl implements WechatMessageService {
                 voiceModel.setMediaId(mediaId);
                 voice.setVoice(voiceModel);
 
-                respMsg = WechatMessageUtil.parseObjMessageToXml(voice);
+                respMsg = WechatMessageXMLParseUtil.parseObjMessageToXml(voice);
                 log.info(respMsg);
             } else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_VIDEO)) {
                 String mediaId = requestMap.get("MediaId");
@@ -97,7 +97,7 @@ public class WechatMessageServiceImpl implements WechatMessageService {
                 videoModel.setDescription("this is a test video");
                 video.setVideo(videoModel);
 
-                respMsg = WechatMessageUtil.parseObjMessageToXml(video);
+                respMsg = WechatMessageXMLParseUtil.parseObjMessageToXml(video);
                 log.info(respMsg);
             }
 

@@ -2,7 +2,7 @@ package me.zqt.wx.constant;
 
 /**
  * @auther: zqtao
- * @description: 微信消息类型常量类：返回消息类型，请求消息类型，时间类型
+ * @description: 微信消息类型常量类：返回消息类型，请求消息类型，事件类型
  * @version: 1.0
  */
 public class MessageTypeConstant {
