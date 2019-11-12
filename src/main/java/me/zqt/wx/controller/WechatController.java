@@ -65,10 +65,7 @@ public class WechatController {
     }
 
     /**
-     * 处理各种请求
-     *
-     * @param request
-     * @param response
+     * 处理微信服务器和客户端之间的各种请求和响应
      */
     @RequestMapping(method = RequestMethod.POST)
     public void post(HttpServletRequest request, HttpServletResponse response) {

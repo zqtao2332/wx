@@ -27,6 +27,11 @@ import java.util.Map;
 @Slf4j
 public class WechatMessageServiceImpl implements WechatMessageService {
 
+    /**
+     * 微信消息处理方法
+     * @param request request
+     * @return 响应消息的XML数据包
+     */
     @Override
     public String newMessageRequest(HttpServletRequest request) {
         log.info(LogConstant.LOG_INFO.replace("INFO", "开始处理消息"));
@@ -68,7 +73,6 @@ public class WechatMessageServiceImpl implements WechatMessageService {
                 imageModel.setMediaId(mediaId);
                 image.setImage(imageModel);
 
-//                respMsg = WechatMessageUtil.imageMessageToXml(image);
                 respMsg = WechatMessageXMLParseUtil.parseObjMessageToXml(image);
                 log.info(respMsg);
             } else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_VOICE)) {
