@@ -11,6 +11,7 @@ import me.zqt.wx.model.message.resp.TextRespMessage;
 import me.zqt.wx.model.message.resp.VideoRespMessage;
 import me.zqt.wx.model.message.resp.VoiceRespMessage;
 import me.zqt.wx.service.WechatMessageService;
+import me.zqt.wx.utils.CommonUtil;
 import me.zqt.wx.utils.MessageRespFactoryUtil;
 import me.zqt.wx.utils.WechatMessageXMLParseUtil;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,22 @@ import java.util.Map;
 @Slf4j
 public class WechatMessageServiceImpl implements WechatMessageService {
 
+    // 临时测试消息接口响应方法
+    private String testMsgInterface(String content) {
+        String fromUserName = "owUDX0kj8U55iVrCqbLgMufa_kq8";
+        String toUserName = "gh_f572346b9834";
+        String msgType = "text";
+
+        MessageRespFactoryUtil<TextRespMessage> factoryUtil = new MessageRespFactoryUtil<>();
+        TextRespMessage text = factoryUtil.getInstance(new TextRespMessage(), fromUserName, toUserName, msgType);
+        text.setContent("您发送的是:  " + content + "消息");
+        return WechatMessageXMLParseUtil.parseObjMessageToXml(text);
+
+    }
+
     /**
      * 微信消息处理方法
+     *
      * @param request request
      * @return 响应消息的XML数据包
      */
@@ -51,17 +66,23 @@ public class WechatMessageServiceImpl implements WechatMessageService {
 
             // 文本消息
             if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_TEXT)) {
+                log.info(LogConstant.LOG_INFO.replace("INFO", "消息类型：文本消息"));
+
                 // 消息内容
                 String content = requestMap.get("Content");
-                log.info("这是一个文本内容" + content);
+                if (CommonUtil.getByteSize(content) > 2047)
+                    content = "请重新编辑发送内容，您发送的内容长度超限，请保持2000字内！！谢谢！";
                 //自动回复
                 MessageRespFactoryUtil<TextRespMessage> factoryUtil = new MessageRespFactoryUtil<>();
                 TextRespMessage text = factoryUtil.getInstance(new TextRespMessage(), fromUserName, toUserName, msgType);
-                text.setContent("这是一个文本内容" + content);
+                text.setContent("您发送的是文本内容 ： " + content);
                 respMsg = WechatMessageXMLParseUtil.parseObjMessageToXml(text);
 
                 log.info(respMsg);
-            } else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_IMAGE)) {
+            }
+            // 图片消息
+            else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_IMAGE)) {
+                log.info(LogConstant.LOG_INFO.replace("INFO", "消息类型：图片消息"));
                 // 图片消息
                 String mediaId = requestMap.get("MediaId");
                 log.info("----------------    这个一个图片    ： " + mediaId);
@@ -75,7 +96,10 @@ public class WechatMessageServiceImpl implements WechatMessageService {
 
                 respMsg = WechatMessageXMLParseUtil.parseObjMessageToXml(image);
                 log.info(respMsg);
-            } else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_VOICE)) {
+            }
+            // 语音消息
+            else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_VOICE)) {
+                log.info(LogConstant.LOG_INFO.replace("INFO", "消息类型：语音消息"));
                 String mediaId = requestMap.get("MediaId");
                 log.info("----------------    这个一条语音    ： " + mediaId);
 
@@ -88,7 +112,10 @@ public class WechatMessageServiceImpl implements WechatMessageService {
 
                 respMsg = WechatMessageXMLParseUtil.parseObjMessageToXml(voice);
                 log.info(respMsg);
-            } else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_VIDEO)) {
+            }
+            // 视频消息
+            else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_VIDEO)) {
+                log.info(LogConstant.LOG_INFO.replace("INFO", "消息类型：视频消息"));
                 String mediaId = requestMap.get("MediaId");
                 log.info("----------------    这个一个视频    ： " + mediaId);
 
@@ -101,8 +128,35 @@ public class WechatMessageServiceImpl implements WechatMessageService {
                 videoModel.setDescription("this is a test video");
                 video.setVideo(videoModel);
 
-                respMsg = WechatMessageXMLParseUtil.parseObjMessageToXml(video);
+//                respMsg = WechatMessageXMLParseUtil.parseObjMessageToXml(video);
+                respMsg = testMsgInterface("视频");
                 log.info(respMsg);
+            }
+            // 地理位置消息
+            else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_LOCATION)) {
+                log.info(LogConstant.LOG_INFO.replace("INFO", "消息类型：地理位置消息"));
+                respMsg = testMsgInterface("地理位置");
+            }
+            // 链接消息
+            else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_LINK)) {
+                respMsg = testMsgInterface("链接");
+            }
+            // 事件推送
+            else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_EVENT)) {
+                // 事件类型
+                String eventType = requestMap.get("Event");
+                // 订阅
+                if (eventType.equals(MessageTypeConstant.EVENT_TYPE_SUBSCRIBE)) {
+                    respMsg = testMsgInterface("谢谢您的关注");
+                }
+                // 取消订阅
+                else if (eventType.equals(MessageTypeConstant.EVENT_TYPE_UNSUBSCRIBE)) {
+                    // TODO 取消订阅后用户再收不到公众号发送的消息，因此不需要回复消息
+                }
+                // 自定义菜单点击事件
+                else if (eventType.equals(MessageTypeConstant.EVENT_TYPE_CLICK)) {
+                    // TODO 自定义菜单权没有开放，暂不处理该类消息
+                }
             }
 
         } catch (Exception e) {
