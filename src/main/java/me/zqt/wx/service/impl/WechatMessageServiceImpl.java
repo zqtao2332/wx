@@ -3,13 +3,11 @@ package me.zqt.wx.service.impl;
 import lombok.extern.slf4j.Slf4j;
 import me.zqt.wx.constant.LogConstant;
 import me.zqt.wx.constant.MessageTypeConstant;
+import me.zqt.wx.model.message.ArticleModel;
 import me.zqt.wx.model.message.ImageModel;
 import me.zqt.wx.model.message.VideoModel;
 import me.zqt.wx.model.message.VoiceModel;
-import me.zqt.wx.model.message.resp.ImageRespMessage;
-import me.zqt.wx.model.message.resp.TextRespMessage;
-import me.zqt.wx.model.message.resp.VideoRespMessage;
-import me.zqt.wx.model.message.resp.VoiceRespMessage;
+import me.zqt.wx.model.message.resp.*;
 import me.zqt.wx.service.WechatMessageService;
 import me.zqt.wx.utils.CommonUtil;
 import me.zqt.wx.utils.MessageRespFactoryUtil;
@@ -17,6 +15,8 @@ import me.zqt.wx.utils.WechatMessageXMLParseUtil;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -67,20 +67,45 @@ public class WechatMessageServiceImpl implements WechatMessageService {
             // 文本消息
             if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_TEXT)) {
                 log.info(LogConstant.LOG_INFO.replace("INFO", "消息类型：文本消息"));
-
                 // 消息内容
                 String content = requestMap.get("Content");
-                if (CommonUtil.getByteSize(content) > 2047)
-                    content = "请重新编辑发送内容，您发送的内容长度超限，请保持2000字内！！谢谢！";
-                //自动回复
-                MessageRespFactoryUtil<TextRespMessage> factoryUtil = new MessageRespFactoryUtil<>();
-                TextRespMessage text = factoryUtil.getInstance(new TextRespMessage(), fromUserName, toUserName, msgType);
-                text.setContent("您发送的是文本内容 ： " + content);
-                if (content.equals("源码"))
-                    text.setContent("<a href=\"https://github.com/zqtao2332\">公众号开发源码</a>");
-                respMsg = WechatMessageXMLParseUtil.parseObjMessageToXml(text);
 
-                log.info(respMsg);
+                MessageRespFactoryUtil<ArticlesRespMessage> factoryUtil = new MessageRespFactoryUtil<>();
+                ArticlesRespMessage message = factoryUtil.getInstance(new ArticlesRespMessage(), fromUserName, toUserName, msgType);
+                List<ArticleModel> articleList = new ArrayList<>();
+
+                // 响应图文消息
+                if (content.equals("源码")) {
+                    ArticleModel article = new ArticleModel();
+                    article.setTitle("微信公众号源码");
+                    article.setDescription("微信公众号开发源码");
+                    article.setPicUrl("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573664856003&di=79b353474993f97566b80c2dee906f2c&imgtype=0&src=http%3A%2F%2Fimg1.cache.netease.com%2Ftech%2F2015%2F6%2F16%2F2015061609482114e9a_550.png");
+                    article.setUrl("https://github.com/zqtao2332/wx");
+                    articleList.add(article);
+                    // 设置图文消息个数
+                    message.setArticleCount(articleList.size());
+                    // 设置图文消息包含的图文集合
+                    message.setArticles(articleList);
+                    // 将图文消息对象转换成xml字符串
+                    message.setMsgType(MessageTypeConstant.RESP_MESSAGE_TYPE_NEWS);
+                    respMsg = WechatMessageXMLParseUtil.articlesMessageToXml(message);
+                    log.info(respMsg);
+                }
+                // 响应普通消息
+                else {
+                    if (CommonUtil.getByteSize(content) > 2047)
+                        content = "请重新编辑发送内容，您发送的内容长度超限，请保持2000字内！！谢谢！";
+                    //自动回复
+                    MessageRespFactoryUtil<TextRespMessage> factoryUtil2 = new MessageRespFactoryUtil<>();
+                    TextRespMessage text = factoryUtil2.getInstance(new TextRespMessage(), fromUserName, toUserName, msgType);
+                    text.setContent("您发送的是文本内容 ： " + content);
+                    if (content.equals("超链接"))
+                        text.setContent("<a href=\"https://github.com/zqtao2332\">公众号开发源码</a>");
+                    respMsg = WechatMessageXMLParseUtil.parseObjMessageToXml(text);
+
+                    log.info(respMsg);
+                }
+
             }
             // 图片消息
             else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_IMAGE)) {

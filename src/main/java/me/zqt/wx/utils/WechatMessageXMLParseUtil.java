@@ -5,6 +5,7 @@ import com.thoughtworks.xstream.core.util.QuickWriter;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.io.xml.XppDriver;
+import me.zqt.wx.model.message.ArticleModel;
 import me.zqt.wx.model.message.BasicMessage;
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -99,6 +100,19 @@ public class WechatMessageXMLParseUtil {
      */
     public static String parseObjMessageToXml(BasicMessage message) {
         xstream.alias("xml", message.getClass());
+        return xstream.toXML(message);
+    }
+
+
+    /**
+     * 图文消息对象转换成xml
+     *
+     * @param message 图文消息对象
+     * @return xml
+     */
+    public static String articlesMessageToXml(BasicMessage message) {
+        xstream.alias("xml", message.getClass());
+        xstream.alias("item", new ArticleModel().getClass());
         return xstream.toXML(message);
     }
 }
