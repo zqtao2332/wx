@@ -89,18 +89,18 @@ public class MenuManagerDriverMain {
         // 一级菜单
         ComplexButton mainBtn1 = new ComplexButton();
         mainBtn1.setName("开发助手");
-        mainBtn1.setSub_button(new BaseButton[]{btn11, btn12});
+        mainBtn1.setSub_button(new BasicButton[]{btn11, btn12});
 
         ComplexButton mainBtn2 = new ComplexButton();
         mainBtn2.setName("知识驿站");
-        mainBtn2.setSub_button(new BaseButton[]{btn21, btn22});
+        mainBtn2.setSub_button(new BasicButton[]{btn21, btn22});
 
         ComplexButton mainBtn3 = new ComplexButton();
         mainBtn3.setName("更多体验");
-        mainBtn3.setSub_button(new BaseButton[]{btn31, btn32, btn33});
+        mainBtn3.setSub_button(new BasicButton[]{btn31, btn32, btn33});
 
         Menu menu = new Menu();
-        menu.setButton(new BaseButton[]{mainBtn1, mainBtn2, mainBtn3});
+        menu.setButton(new BasicButton[]{mainBtn1, mainBtn2, mainBtn3});
         return menu;
     }
 
@@ -142,7 +142,7 @@ public class MenuManagerDriverMain {
 
         ComplexButton mainBtn1 = new ComplexButton();
         mainBtn1.setName("生活助手");
-        mainBtn1.setSub_button(new BaseButton[]{btn11, btn12});
+        mainBtn1.setSub_button(new BasicButton[]{btn11, btn12});
 
         ComplexButton mainBtn2 = new ComplexButton();
         mainBtn2.setName("休闲驿站");
@@ -153,7 +153,7 @@ public class MenuManagerDriverMain {
         mainBtn3.setSub_button(new ViewButton[]{btn31, btn32, btn33});
 
         Menu menu = new Menu();
-        menu.setButton(new BaseButton[]{mainBtn1, mainBtn2, mainBtn3});
+        menu.setButton(new BasicButton[]{mainBtn1, mainBtn2, mainBtn3});
         return menu;
     }
 }

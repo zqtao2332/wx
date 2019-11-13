@@ -11,5 +11,5 @@ import lombok.Data;
  */
 @Data
 public class Menu {
-    private BaseButton[] button;
+    private BasicButton[] button;
 }

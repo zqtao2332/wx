@@ -8,6 +8,6 @@ import lombok.Data;
  * @version: 1.0
  */
 @Data
-public class ComplexButton extends BaseButton {
-    private BaseButton[] sub_button;
+public class ComplexButton extends BasicButton {
+    private BasicButton[] sub_button;
 }

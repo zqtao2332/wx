@@ -10,7 +10,7 @@ import lombok.Data;
  */
 
 @Data
-public class BaseButton {
+public class BasicButton {
     /**
      * 菜单标题，不超过16个字节，子菜单不超过60个字节
      */

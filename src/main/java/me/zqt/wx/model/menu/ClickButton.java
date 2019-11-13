@@ -8,7 +8,7 @@ import lombok.Data;
  * @version: 1.0
  */
 @Data
-public class ClickButton extends BaseButton {
+public class ClickButton extends BasicButton {
     /**
      * 菜单KEY值，用于消息接口推送，不超过128字节
      */

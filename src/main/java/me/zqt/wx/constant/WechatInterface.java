@@ -85,12 +85,12 @@ public class WechatInterface {
     public static final String DELETE_PERSONAL_MENU_URL = "https://api.weixin.qq.com/cgi-bin/menu/delconditional?access_token=ACCESS_TOKEN";
 
     /**
-     * 给用户打标签的姐接口
+     * 给用户打标签的接口
      */
     public static final String CREATE_USERTAG_URL = "https://api.weixin.qq.com/cgi-bin/tags/members/batchtagging?access_token=ACCESS_TOKEN";
 
     /**
-     * 网页授权获取用户详细信息的的接口
+     * 网页授权获取用户详细信息的接口
      */
     public static final String GET_USERINFO_URL = "https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN";
 

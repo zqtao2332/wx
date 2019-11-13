@@ -49,7 +49,7 @@ public class WechatMessageServiceImpl implements WechatMessageService {
      */
     @Override
     public String newMessageRequest(HttpServletRequest request) {
-        log.info(LogConstant.LOG_INFO.replace("INFO", "开始处理消息"));
+        log.info(LogConstant.LOG_INFO.replace("INFO", "newMessageRequest 开始处理消息"));
         String respMsg = null;
 
         try {
@@ -76,6 +76,8 @@ public class WechatMessageServiceImpl implements WechatMessageService {
                 MessageRespFactoryUtil<TextRespMessage> factoryUtil = new MessageRespFactoryUtil<>();
                 TextRespMessage text = factoryUtil.getInstance(new TextRespMessage(), fromUserName, toUserName, msgType);
                 text.setContent("您发送的是文本内容 ： " + content);
+                if (content.equals("源码"))
+                    text.setContent("<a href=\"https://github.com/zqtao2332\">公众号开发源码</a>");
                 respMsg = WechatMessageXMLParseUtil.parseObjMessageToXml(text);
 
                 log.info(respMsg);
@@ -162,7 +164,7 @@ public class WechatMessageServiceImpl implements WechatMessageService {
         } catch (Exception e) {
             log.error(LogConstant.LOG_ERROR.replace("ERROR", e.getMessage()));
         } finally {
-            log.info(LogConstant.LOG_INFO.replace("INFO", "开始处理消息"));
+            log.info(LogConstant.LOG_INFO.replace("INFO", "newMessageRequest 结束处理消息"));
         }
         return respMsg;
     }
