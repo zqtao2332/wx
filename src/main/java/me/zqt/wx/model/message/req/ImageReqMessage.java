@@ -1,7 +1,6 @@
 package me.zqt.wx.model.message.req;
 
 import lombok.Data;
-import me.zqt.wx.model.ImageModel;
 
 /**
  * @auther: zqtao

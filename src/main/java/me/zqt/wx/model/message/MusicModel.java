@@ -1,4 +1,4 @@
-package me.zqt.wx.model;
+package me.zqt.wx.model.message;
 
 import lombok.Data;
 

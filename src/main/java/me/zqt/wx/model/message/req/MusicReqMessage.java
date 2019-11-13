@@ -1,7 +1,7 @@
 package me.zqt.wx.model.message.req;
 
 import lombok.Data;
-import me.zqt.wx.model.MusicModel;
+import me.zqt.wx.model.message.MusicModel;
 
 /**
  * @auther: zqtao

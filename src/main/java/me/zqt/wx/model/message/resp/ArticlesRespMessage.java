@@ -1,7 +1,8 @@
-package me.zqt.wx.model.message.req;
+package me.zqt.wx.model.message.resp;
 
 import lombok.Data;
-import me.zqt.wx.model.ArticleModel;
+import me.zqt.wx.model.message.ArticleModel;
+import me.zqt.wx.model.message.req.ReqBasicMessage;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @version: 1.0
  */
 @Data
-public class ArticlesReqMessage extends ReqBasicMessage {
+public class ArticlesRespMessage extends ReqBasicMessage {
     /**
      * 图文消息个数，限制为10条以内
      */
@@ -21,5 +22,4 @@ public class ArticlesReqMessage extends ReqBasicMessage {
      * 多条图文消息信息，默认第一个item为大图
      */
     private List<ArticleModel> Articles;
-
 }

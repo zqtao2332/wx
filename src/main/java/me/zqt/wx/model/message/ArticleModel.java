@@ -1,4 +1,4 @@
-package me.zqt.wx.model;
+package me.zqt.wx.model.message;
 
 import lombok.Data;
 
@@ -9,6 +9,12 @@ import lombok.Data;
  */
 @Data
 public class ArticleModel {
+
+    /**
+     * 图文消息名称
+     */
+    private String Title;
+
     /**
      * 图文消息描述
      */
@@ -19,11 +25,6 @@ public class ArticleModel {
      * 较好的效果为大图640*320，小图80*80
      */
     private String PicUrl;
-
-    /**
-     * 图文消息名称
-     */
-    private String Title;
 
     /**
      * 点击图文消息跳转链接

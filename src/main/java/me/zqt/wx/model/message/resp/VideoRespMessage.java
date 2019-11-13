@@ -1,7 +1,7 @@
 package me.zqt.wx.model.message.resp;
 
 import lombok.Data;
-import me.zqt.wx.model.VideoModel;
+import me.zqt.wx.model.message.VideoModel;
 import me.zqt.wx.model.message.BasicMessage;
 
 /**

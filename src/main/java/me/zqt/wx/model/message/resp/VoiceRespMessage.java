@@ -1,9 +1,8 @@
 package me.zqt.wx.model.message.resp;
 
 import lombok.Data;
-import me.zqt.wx.model.VoiceModel;
+import me.zqt.wx.model.message.VoiceModel;
 import me.zqt.wx.model.message.BasicMessage;
-import me.zqt.wx.model.message.req.ReqBasicMessage;
 
 /**
  * @auther: zqtao

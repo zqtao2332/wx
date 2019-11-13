@@ -1,14 +1,14 @@
-package me.zqt.wx.model;
+package me.zqt.wx.model.message;
 
 import lombok.Data;
 
 /**
  * @auther: zqtao
- * @description: 图片消息model
+ * @description: 语音消息model
  * @version: 1.0
  */
 @Data
-public class ImageModel {
+public class VoiceModel {
     /**
      * 媒体文件ID
      */
