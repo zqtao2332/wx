@@ -58,6 +58,13 @@ public static final String APP_SECRET = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 
 ### 版本更新日志
 
+#### **V 1.0.2**
+
+| 更新内容操作 | 更新描述                 |
+| :----------: | ------------------------ |
+|      +       | 新增文本消息内容长度限制 |
+|      =       | 修正类名，错误注释       |
+
 #### **V 1.0.0**
 
 时间节点：[V1.0.0](https://github.com/zqtao2332/wx/tree/c9829d2cc9ff564500a39b344798effcccd3a5aa)
