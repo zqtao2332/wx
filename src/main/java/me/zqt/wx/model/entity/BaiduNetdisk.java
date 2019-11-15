@@ -1,6 +1,5 @@
 package me.zqt.wx.model.entity;
 
-import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
