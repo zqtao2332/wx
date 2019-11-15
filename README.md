@@ -50,22 +50,33 @@ public static final String APP_SECRET = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 
 ### 版本下载
 
-| 版本    | 下载地址                                                     |
-| ------- | ------------------------------------------------------------ |
-| V 1.0.0 | [https://github.com/zqtao2332/wx/tree/c9829d2cc9ff564500a39b344798effcccd3a5aa](https://github.com/zqtao2332/wx/tree/c9829d2cc9ff564500a39b344798effcccd3a5aa) |
+| 版本    | 描述        | 下载地址                                                     |
+| ------- | ----------- | ------------------------------------------------------------ |
+| V 1.1.0 | 无SQL最终版 |                                                              |
+| V 1.0.0 |             | [https://github.com/zqtao2332/wx/tree/c9829d2cc9ff564500a39b344798effcccd3a5aa](https://github.com/zqtao2332/wx/tree/c9829d2cc9ff564500a39b344798effcccd3a5aa) |
 
 
 
 ### 版本更新日志
 
-#### **V 1.0.2**
+#### 【V 1.0.5】
+
+| 更新内容操作 | 更新描述               |
+| :----------: | ---------------------- |
+|      +       | 新增响应消息之图文消息 |
+|      *       | 优化几个小细节问题     |
+|      +       | 自定义个性banner       |
+
+
+
+#### 【V 1.0.2】
 
 | 更新内容操作 | 更新描述                 |
 | :----------: | ------------------------ |
 |      +       | 新增文本消息内容长度限制 |
-|      =       | 修正类名，错误注释       |
+|      *       | 修正类名，错误注释       |
 
-#### **V 1.0.0**
+#### 【**V 1.0.0**】
 
 时间节点：[V1.0.0](https://github.com/zqtao2332/wx/tree/c9829d2cc9ff564500a39b344798effcccd3a5aa)
 
