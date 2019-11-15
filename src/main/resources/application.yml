@@ -32,7 +32,7 @@ logging:
   level:
     root: warn
     # 配置日志关注点，关注 mapper包下 最低级别日志
-    com.example.demo.mapper: trace
+    me.zqt.wx.mapper: trace
   # 日志输出格式
   pattern:
     # 级别 内容 换行
