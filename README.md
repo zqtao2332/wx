@@ -52,7 +52,7 @@ public static final String APP_SECRET = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 
 | 版本    | 描述        | 下载地址                                                     |
 | ------- | ----------- | ------------------------------------------------------------ |
-| V 1.1.0 | 无SQL最终版 |                                                              |
+| V 1.1.0 | 无SQL最终版 | [https://github.com/zqtao2332/wx/tree/9ef113ae4dac397271cab7e0949c5620e471f43d](https://github.com/zqtao2332/wx/tree/9ef113ae4dac397271cab7e0949c5620e471f43d) |
 | V 1.0.0 |             | [https://github.com/zqtao2332/wx/tree/c9829d2cc9ff564500a39b344798effcccd3a5aa](https://github.com/zqtao2332/wx/tree/c9829d2cc9ff564500a39b344798effcccd3a5aa) |
 
 
