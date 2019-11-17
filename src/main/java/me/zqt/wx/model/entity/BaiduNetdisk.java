@@ -30,12 +30,7 @@ public class BaiduNetdisk implements Serializable {
     private String url;
 
     /**
-     * 有效期(永久有效/7/1天)
-     */
-    private Integer expiryDate;
-
-    /**
-     * 有效性(有/失效)
+     * 有效性(有/失效，默认有效)
      */
     private Integer validity;
 

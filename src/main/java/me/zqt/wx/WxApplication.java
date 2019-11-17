@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("me.zqt.wx.controller.mapper")
+@MapperScan("me.zqt.wx.mapper")
 public class WxApplication {
 
     public static void main(String[] args) {
