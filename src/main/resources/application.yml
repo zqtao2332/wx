@@ -22,7 +22,7 @@ spring:
       enabled: true
   # 数据源
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/db_wx?useSSL=false&serverTimezone=GMT%2B8
     password: root
     username: root
@@ -32,7 +32,7 @@ logging:
   level:
     root: warn
     # 配置日志关注点，关注 mapper包下 最低级别日志
-    me.zqt.wx.mapper: trace
+    me.zqt.wx: trace
   # 日志输出格式
   pattern:
     # 级别 内容 换行
