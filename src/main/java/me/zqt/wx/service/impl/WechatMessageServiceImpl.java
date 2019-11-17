@@ -3,20 +3,17 @@ package me.zqt.wx.service.impl;
 import lombok.extern.slf4j.Slf4j;
 import me.zqt.wx.constant.LogConstant;
 import me.zqt.wx.constant.MessageTypeConstant;
-import me.zqt.wx.model.message.ArticleModel;
-import me.zqt.wx.model.message.ImageModel;
-import me.zqt.wx.model.message.VideoModel;
-import me.zqt.wx.model.message.VoiceModel;
-import me.zqt.wx.model.message.resp.*;
+import me.zqt.wx.model.message.resp.TextRespMessage;
 import me.zqt.wx.service.WechatMessageService;
-import me.zqt.wx.utils.CommonUtil;
+import me.zqt.wx.service.message.ImageMessageService;
+import me.zqt.wx.service.message.TextMessageService;
+import me.zqt.wx.service.message.VoiceMessageService;
 import me.zqt.wx.utils.MessageRespFactoryUtil;
 import me.zqt.wx.utils.WechatMessageXMLParseUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,6 +25,13 @@ import java.util.Map;
 @Slf4j
 public class WechatMessageServiceImpl implements WechatMessageService {
 
+    @Autowired
+    private TextMessageService textMessageService;
+    @Autowired
+    private ImageMessageService imageMessageService;
+    @Autowired
+    private VoiceMessageService voiceMessageService;
+
     // 临时测试消息接口响应方法
     private String testMsgInterface(String content) {
         String fromUserName = "owUDX0kj8U55iVrCqbLgMufa_kq8";
@@ -38,7 +42,6 @@ public class WechatMessageServiceImpl implements WechatMessageService {
         TextRespMessage text = factoryUtil.getInstance(new TextRespMessage(), fromUserName, toUserName, msgType);
         text.setContent("您发送的是:  " + content + "消息");
         return WechatMessageXMLParseUtil.parseObjMessageToXml(text);
-
     }
 
     /**
@@ -50,112 +53,25 @@ public class WechatMessageServiceImpl implements WechatMessageService {
     @Override
     public String newMessageRequest(HttpServletRequest request) {
         log.info(LogConstant.LOG_INFO.replace("INFO", "newMessageRequest 开始处理消息"));
-        String respMsg = null;
-
+        String respMsg = "";
         try {
             // xml请求解析
             Map<String, String> requestMap = WechatMessageXMLParseUtil.parseXml(request);
-            // 发送方帐号（open_id）
-            String fromUserName = requestMap.get("FromUserName");
-            // 公众帐号
-            String toUserName = requestMap.get("ToUserName");
-            // 消息类型
             String msgType = requestMap.get("MsgType");
-
-            log.info("FromUserName is:" + fromUserName + ", ToUserName is:" + toUserName + ", MsgType is:" + msgType);
-
             // 文本消息
             if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_TEXT)) {
-                log.info(LogConstant.LOG_INFO.replace("INFO", "消息类型：文本消息"));
-                // 消息内容
-                String content = requestMap.get("Content");
-
-                MessageRespFactoryUtil<ArticlesRespMessage> factoryUtil = new MessageRespFactoryUtil<>();
-                ArticlesRespMessage message = factoryUtil.getInstance(new ArticlesRespMessage(), fromUserName, toUserName, msgType);
-                List<ArticleModel> articleList = new ArrayList<>();
-
-                // 响应图文消息
-                if (content.equals("源码")) {
-                    ArticleModel article = new ArticleModel();
-                    article.setTitle("微信公众号源码");
-                    article.setDescription("微信公众号开发源码");
-                    article.setPicUrl("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573664856003&di=79b353474993f97566b80c2dee906f2c&imgtype=0&src=http%3A%2F%2Fimg1.cache.netease.com%2Ftech%2F2015%2F6%2F16%2F2015061609482114e9a_550.png");
-                    article.setUrl("https://github.com/zqtao2332/wx");
-                    articleList.add(article);
-                    // 设置图文消息个数
-                    message.setArticleCount(articleList.size());
-                    // 设置图文消息包含的图文集合
-                    message.setArticles(articleList);
-                    // 将图文消息对象转换成xml字符串
-                    message.setMsgType(MessageTypeConstant.RESP_MESSAGE_TYPE_NEWS);
-                    respMsg = WechatMessageXMLParseUtil.articlesMessageToXml(message);
-                    log.info(respMsg);
-                }
-                // 响应普通消息
-                else {
-                    if (CommonUtil.getByteSize(content) > 2047)
-                        content = "请重新编辑发送内容，您发送的内容长度超限，请保持2000字内！！谢谢！";
-                    //自动回复
-                    MessageRespFactoryUtil<TextRespMessage> factoryUtil2 = new MessageRespFactoryUtil<>();
-                    TextRespMessage text = factoryUtil2.getInstance(new TextRespMessage(), fromUserName, toUserName, msgType);
-                    text.setContent("您发送的是文本内容 ： " + content);
-                    if (content.equals("超链接"))
-                        text.setContent("<a href=\"https://github.com/zqtao2332\">公众号开发源码</a>");
-                    respMsg = WechatMessageXMLParseUtil.parseObjMessageToXml(text);
-
-                    log.info(respMsg);
-                }
-
+                respMsg = textMessageService.messageHandler(requestMap);
             }
             // 图片消息
             else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_IMAGE)) {
-                log.info(LogConstant.LOG_INFO.replace("INFO", "消息类型：图片消息"));
-                // 图片消息
-                String mediaId = requestMap.get("MediaId");
-                log.info("----------------    这个一个图片    ： " + mediaId);
-
-                MessageRespFactoryUtil<ImageRespMessage> factoryUtil = new MessageRespFactoryUtil<>();
-                ImageRespMessage image = factoryUtil.getInstance(new ImageRespMessage(), fromUserName, toUserName, msgType);
-
-                ImageModel imageModel = new ImageModel();
-                imageModel.setMediaId(mediaId);
-                image.setImage(imageModel);
-
-                respMsg = WechatMessageXMLParseUtil.parseObjMessageToXml(image);
-                log.info(respMsg);
+                respMsg = imageMessageService.messageHandler(requestMap);
             }
             // 语音消息
             else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_VOICE)) {
-                log.info(LogConstant.LOG_INFO.replace("INFO", "消息类型：语音消息"));
-                String mediaId = requestMap.get("MediaId");
-                log.info("----------------    这个一条语音    ： " + mediaId);
-
-                MessageRespFactoryUtil<VoiceRespMessage> factoryUtil = new MessageRespFactoryUtil<>();
-                VoiceRespMessage voice = factoryUtil.getInstance(new VoiceRespMessage(), fromUserName, toUserName, msgType);
-
-                VoiceModel voiceModel = new VoiceModel();
-                voiceModel.setMediaId(mediaId);
-                voice.setVoice(voiceModel);
-
-                respMsg = WechatMessageXMLParseUtil.parseObjMessageToXml(voice);
-                log.info(respMsg);
+                respMsg = voiceMessageService.messageHandler(requestMap);
             }
             // 视频消息
             else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_VIDEO)) {
-                log.info(LogConstant.LOG_INFO.replace("INFO", "消息类型：视频消息"));
-                String mediaId = requestMap.get("MediaId");
-                log.info("----------------    这个一个视频    ： " + mediaId);
-
-                MessageRespFactoryUtil<VideoRespMessage> factoryUtil = new MessageRespFactoryUtil<>();
-                VideoRespMessage video = factoryUtil.getInstance(new VideoRespMessage(), fromUserName, toUserName, msgType);
-
-                VideoModel videoModel = new VideoModel();
-                videoModel.setMediaId(mediaId);
-                videoModel.setTitle("test");
-                videoModel.setDescription("this is a test video");
-                video.setVideo(videoModel);
-
-//                respMsg = WechatMessageXMLParseUtil.parseObjMessageToXml(video);
                 respMsg = testMsgInterface("视频");
                 log.info(respMsg);
             }
@@ -185,7 +101,6 @@ public class WechatMessageServiceImpl implements WechatMessageService {
                     // TODO 自定义菜单权没有开放，暂不处理该类消息
                 }
             }
-
         } catch (Exception e) {
             log.error(LogConstant.LOG_ERROR.replace("ERROR", e.getMessage()));
         } finally {
