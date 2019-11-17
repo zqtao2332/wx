@@ -27,3 +27,4 @@ ${AnsiColor.BRIGHT_GREEN}=「WX Application」 designed & code By zqt on 2019   
 = E-mail：zqtao23#163.com or 453395742#qq.com (@ instead of #)  =
 = qq群：624288930                                               =
 ${AnsiColor.BRIGHT_RED}=================================================================
+${AnsiColor.MAGENTA}
