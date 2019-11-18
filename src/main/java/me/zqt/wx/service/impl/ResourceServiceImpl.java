@@ -51,6 +51,11 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource>
                 new QueryWrapperUtil<Resource>().eqInstance("name", resource.getName()));
     }
 
+    public int add(Resource resource){
+        Resource byName = getByName(resource.getName());
+        return byName == null ? resourceMapper.insert(resource) : 0;
+    }
+
     /**
      * 资源操作分配方法
      * 操作模板：资源#增#资源名称#资源URL
@@ -64,11 +69,11 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource>
         String content = "";
 
         if (properties[1].equals("增")) {
-            int res = resourceMapper.insert(getResourceInstance(properties));
-            content = "" + (res == 1 ? "新增资源成功！" : "新增资源失败！");
+            Resource resource = getResourceInstance(properties);
+            content = "" + (add(resource) == 1 ? "新增资源成功！" : "新增资源失败！");
         } else if (properties[1].equals("删")) {
             int res = removeByName(properties[2]);
-            content = "" + (res == 1 ? "删除资源成功！" : "删除资源失败！");
+            content = "" + (res == 0 ? "资源不存在！" : "删除资源成功！");
         } else if (properties[1].equals("改")) {
             Resource resource = getByName(properties[2]);
             int res = modifiedResource(resource);
