@@ -29,10 +29,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource>
 
     @Override
     public Resource getByName(String name) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("name", name);
-        List<Resource> resources = resourceMapper.selectByMap(map);
-        return resources.get(0);
+        return resourceMapper.selectOne(new QueryWrapperUtil<Resource>().eqInstance("name", name));
     }
 
     @Override
@@ -91,7 +88,6 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource>
         } else {
             content = "请检查输入！资源操作模板：资源#增#资源名称#资源URL";
         }
-
         return content;
     }
 

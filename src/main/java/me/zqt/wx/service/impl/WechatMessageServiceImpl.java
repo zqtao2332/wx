@@ -126,8 +126,6 @@ public class WechatMessageServiceImpl implements WechatMessageService {
         } finally {
             log.info(LogConstant.LOG_INFO.replace("INFO", "newMessageRequest 结束处理消息"));
         }
-        log.info("再次验证");
-        log.info(respMsg);
         return respMsg;
     }
 }
