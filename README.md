@@ -44,6 +44,17 @@ public static final String APP_ID = "xxxxxxxxxxxxxxxxxx";
 public static final String APP_SECRET = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 ```
 
+修改`application.yml`配置文件的数据库名、数据库用户名、数据库密码
+
+```
+  # 数据源
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/数据库名?useSSL=false&serverTimezone=GMT%2B8
+    username: 数据库用户名
+    password: 数据库密码
+```
+
 运行   **`me.zqt.wx.WxApplication`**   即可！
 
 
@@ -58,6 +69,29 @@ public static final String APP_SECRET = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 
 
 ### 版本更新日志
+
+#### 【V 1.1.9】
+
+| 更新内容操作 | 更新描述               |
+| :----------: | ---------------------- |
+|      *       | 更新菜单点击事件响应   |
+|      *       | 更新文本消息之资源操作 |
+|      +       | 新增普通资源操作       |
+|      *       | 优化网盘链接查询       |
+
+
+
+#### 【V 1.1.5】
+
+| 更新内容操作 | 更新描述                     |
+| :----------: | ---------------------------- |
+|      *       | 优化不同类型消息处理服务     |
+|      *       | 优化微信消息响应类型封装工具 |
+|      *       | 优化日志配置                 |
+|      +       | 新增百度网盘链接数据库表     |
+|      +       | 新增mysql数据源              |
+
+
 
 #### 【V 1.0.5】
 
