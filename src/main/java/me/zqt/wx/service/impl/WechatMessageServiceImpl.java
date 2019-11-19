@@ -40,7 +40,7 @@ public class WechatMessageServiceImpl implements WechatMessageService {
 
         MessageRespFactoryUtil<TextRespMessage> factoryUtil = new MessageRespFactoryUtil<>();
         TextRespMessage text = factoryUtil.getInstance(new TextRespMessage(), fromUserName, toUserName, msgType);
-        text.setContent("您发送的是:  " + content + "消息");
+        text.setContent(content);
         return WechatMessageXMLParseUtil.parseObjMessageToXml(text);
     }
 
@@ -86,11 +86,14 @@ public class WechatMessageServiceImpl implements WechatMessageService {
             }
             // 事件推送
             else if (msgType.equals(MessageTypeConstant.REQ_MESSAGE_TYPE_EVENT)) {
+
+                log.info(LogConstant.LOG_INFO.replace("INFO", "捕获到事件"));
+
                 // 事件类型
                 String eventType = requestMap.get("Event");
                 // 订阅
                 if (eventType.equals(MessageTypeConstant.EVENT_TYPE_SUBSCRIBE)) {
-                    respMsg = testMsgInterface("谢谢您的关注");
+                    respMsg = testMsgInterface("谢谢您的关注！祝您生活愉快！");
                 }
                 // 取消订阅
                 else if (eventType.equals(MessageTypeConstant.EVENT_TYPE_UNSUBSCRIBE)) {
@@ -99,6 +102,23 @@ public class WechatMessageServiceImpl implements WechatMessageService {
                 // 自定义菜单点击事件
                 else if (eventType.equals(MessageTypeConstant.EVENT_TYPE_CLICK)) {
                     // TODO 自定义菜单权没有开放，暂不处理该类消息
+                    String eventKey = requestMap.get("EventKey");
+                    if (eventKey.equals("11")) {
+                        respMsg = testMsgInterface("资源操作模板：\n" +
+                                "资源#增(删/改/查)#资源名称#资源URL\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "如新增资源 eclipse, 根据资源操作模板书写规则：\n" +
+                                "\n" +
+                                "资源#增#eclipse#链接：https://pan.baidu.com/s/1eFEQUS4pC5FtSkjHf80OhQ \n" +
+                                "提取码：05k4 \n" +
+                                "复制这段内容后打开百度网盘手机App，操作更方便哦\n" +
+                                "\n" +
+                                "\n" +
+                                "\n" +
+                                "其他如删除资源，查找资源均如上规则！");
+                    }
                 }
             }
         } catch (Exception e) {
@@ -106,6 +126,8 @@ public class WechatMessageServiceImpl implements WechatMessageService {
         } finally {
             log.info(LogConstant.LOG_INFO.replace("INFO", "newMessageRequest 结束处理消息"));
         }
+        log.info("再次验证");
+        log.info(respMsg);
         return respMsg;
     }
 }

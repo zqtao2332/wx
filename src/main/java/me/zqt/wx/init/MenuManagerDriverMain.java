@@ -51,7 +51,7 @@ public class MenuManagerDriverMain {
 
         // 子按钮（菜单）
         ClickButton btn11 = new ClickButton();
-        btn11.setName("开发工具");
+        btn11.setName("资源菜单");
         btn11.setType("click");
         btn11.setKey("11");
 
@@ -88,7 +88,7 @@ public class MenuManagerDriverMain {
 
         // 一级菜单
         ComplexButton mainBtn1 = new ComplexButton();
-        mainBtn1.setName("开发助手");
+        mainBtn1.setName("资源助手");
         mainBtn1.setSub_button(new BasicButton[]{btn11, btn12});
 
         ComplexButton mainBtn2 = new ComplexButton();
