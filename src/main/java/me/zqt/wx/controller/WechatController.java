@@ -79,10 +79,8 @@ public class WechatController {
             e.printStackTrace();
             log.info(LogConstant.LOG_ERROR.replace("ERROR", "编码错误"));
         }
-
         // 调用核心业务类接收消息、处理消息
         String respMessage = wechatMessageService.newMessageRequest(request);
-
         // 响应消息
         PrintWriter out = null;
         try {
