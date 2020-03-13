@@ -47,6 +47,7 @@ mybatis-plus:
   # mapper.xml 存储路径
   mapper-locations: classpath:/mappers/*.xml
 
-#server:
-#  tomcat:
-#    uri-encoding: UTF-8
+server:
+  port: 80
+  tomcat:
+    uri-encoding: UTF-8
